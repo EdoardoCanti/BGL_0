@@ -68,8 +68,24 @@ int main()
         }
     } //Mi aspetto lo stesso output di prima con l'aggiunta di: (0,v1), (v1,0), (4,v1), (v1,4)
     
+    std::cout<<std::endl;
     
+    //Printing out-edges for each node (N.B undirected graph means out-edges = in-edges)
+    undirected_graph::out_edge_iterator outEdge, outEdgeEnd;
+    for(boost::tie(vIterator, vIteratorEnd) = boost::vertices(graph); vIterator!=vIteratorEnd; ++vIterator)
+    {
+        for(boost::tie(outEdge, outEdgeEnd) = boost::out_edges(*vIterator, graph); outEdge!=outEdgeEnd; ++outEdge)
+            std::cout<<"Out-Edge(): "<<*outEdge<<" "<<std::endl;
+    }
     
+    std::cout<<std::endl;
+     //Printing in-edges for each node (N.B undirected graph means out-edges = in-edges)
+    undirected_graph::in_edge_iterator inEdge, inEdgeEnd;
+    for(boost::tie(vIterator, vIteratorEnd)=boost::vertices(graph); vIterator!=vIteratorEnd; ++vIterator)
+    {
+        for(boost::tie(inEdge, inEdgeEnd)=boost::in_edges(*vIterator, graph); inEdge!=inEdgeEnd; ++inEdge)
+            std::cout<<"In-Edge(): "<<*inEdge<<" "<<std::endl;
+    }
     
     
 }
