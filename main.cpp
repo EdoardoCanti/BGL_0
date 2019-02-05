@@ -112,12 +112,28 @@ int main()
     boost::add_edge(v1, v3, directG); //aggiunta arco(v1,v3)
     boost::add_edge(v3, v1, directG); //aggiunta arco (v3,v1)
     
-    std::cout<<"Edge-List: "<<std::endl;
+    std::cout<<"Edge List: "<<std::endl;
     for(boost::tie(d_iterator, d_iteratorEnd) = boost::vertices(directG); d_iterator!=d_iteratorEnd; ++d_iterator)
     {
         for(boost::tie(d_adjNode, d_adjNodeEnd)=boost::adjacent_vertices(*d_iterator, directG); d_adjNode!=d_adjNodeEnd; ++d_adjNode)
             std::cout<<"Edge("<<*d_iterator<<","<<*d_adjNode<<")"<<std::endl;
     }
+    
+    std::cout<<"Out-Edge list for each vertex:"<<std::endl;
+    for(boost::tie(d_iterator, d_iteratorEnd)=boost::vertices(directG); d_iterator!=d_iteratorEnd; ++d_iterator)
+    {
+        for(boost::tie(d_outEdge, d_outEdgeEnd)=boost::out_edges(*d_iterator, directG); d_outEdge!=d_outEdgeEnd; ++d_outEdge)
+            std::cout<<"Out-Edge(): "<<*d_outEdge<<" "<<std::endl;
+    }
+    
+    /* FIX-IT
+    std::cout<<"In-Edge list for each vertex:"<<std::endl;
+    for(boost::tie(d_iterator, d_iteratorEnd)=boost::vertices(directG); d_iterator!=d_iteratorEnd; ++d_iterator)
+    {
+        for(boost::tie(d_inEdge, d_inEdgeEnd)=boost::in_edges(*d_iterator, directG); d_inEdge!=d_inEdgeEnd; ++d_inEdge)
+            std::cout<<"In-Edge(): "<<*d_inEdge<<" "<<std::endl;
+    }
+     */
     
 }
 
