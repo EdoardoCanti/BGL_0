@@ -96,7 +96,7 @@ int main()
      */
     
     //definisco un tipo di grafo diretto (orientato)
-    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::directedS> directed_graph;
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::bidirectionalS> directed_graph;
     directed_graph directG; //definizione del tipo di grafo diretto (orientato)
     
     directed_graph::vertex_iterator d_iterator, d_iteratorEnd; //iteratore vertici (grafo diretto)
@@ -126,14 +126,18 @@ int main()
             std::cout<<"Out-Edge(): "<<*d_outEdge<<" "<<std::endl;
     }
     
-    /* FIX-IT
+    //Fixed using bidirectional graph
     std::cout<<"In-Edge list for each vertex:"<<std::endl;
     for(boost::tie(d_iterator, d_iteratorEnd)=boost::vertices(directG); d_iterator!=d_iteratorEnd; ++d_iterator)
     {
         for(boost::tie(d_inEdge, d_inEdgeEnd)=boost::in_edges(*d_iterator, directG); d_inEdge!=d_inEdgeEnd; ++d_inEdge)
             std::cout<<"In-Edge(): "<<*d_inEdge<<" "<<std::endl;
     }
-     */
+    
+    
+    
+    
+    
     
 }
 
