@@ -5,8 +5,6 @@
 //  Created by Edoardo Canti on 31/01/19.
 //  Copyright © 2019 Edoardo Canti. All rights reserved.
 //
-
-
 #include <boost/config.hpp>
 #include <iostream>
 #include <boost/graph/adjacency_list.hpp>
@@ -46,7 +44,7 @@ int main()
             std::cout<<"Edge ("<<*vIterator<<","<<*adjNode<<")"<<std::endl;
     }
     
-    //Aggiunita di un nuovo nodo e di due nuovi archi a partire da un grafo già costruito
+    //Aggiunta di un nuovo nodo e di due nuovi archi a partire da un grafo già costruito
     
     boost::adjacency_list<>::vertex_descriptor v = boost::add_vertex(graph);
     boost::add_edge(0, v, graph);
@@ -134,7 +132,44 @@ int main()
             std::cout<<"In-Edge(): "<<*d_inEdge<<" "<<std::endl;
     }
     
+    //TODO: Implementare grafo pesato
+    std::cout<<std::endl;
+    std::cout<<"[DIRECT WEIGHTED GRAPH]"<<std::endl;
+    typedef boost::property<boost::edge_weight_t, int> EDGEWEIGHT;
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::bidirectionalS, boost::no_property ,EDGEWEIGHT> weighted_graph;
     
+    weighted_graph weightedG;
+    
+    boost::adjacency_list<>::vertex_descriptor w1 = boost::add_vertex(weightedG);
+    boost::adjacency_list<>::vertex_descriptor w2 = boost::add_vertex(weightedG);
+    boost::adjacency_list<>::vertex_descriptor w3 = boost::add_vertex(weightedG);
+    
+    weighted_graph::vertex_iterator w_Iterator, w_IteratorEnd;
+    weighted_graph::adjacency_iterator w_adjNode, w_adjNodeEnd;
+    weighted_graph::in_edge_iterator w_inEdge, w_inEdgeEnd;
+    weighted_graph::out_edge_iterator w_outEdge, w_outEdgeEnd;
+    weighted_graph::edge_iterator w_edge, w_edgeEnd;
+    
+    boost::add_edge(w1, w2, 3, weightedG);
+    boost::add_edge(w2, w1, 1, weightedG);
+    boost::add_edge(w1, w3, 4, weightedG);
+    
+    std::cout<<"Vertices of weighted graph: ";
+    for(boost::tie(w_Iterator, w_IteratorEnd)=boost::vertices(weightedG); w_Iterator!=w_IteratorEnd; ++w_Iterator)
+        std::cout<<*w_Iterator<<" ";
+    
+    std::cout<<std::endl;
+    std::cout<<"Edges List:"<<std::endl;
+    for(boost::tie(w_edge, w_edgeEnd)=boost::edges(weightedG); w_edge!=w_edgeEnd; ++w_edge)
+        std::cout<<*w_edge<<" "<<std::endl;
+    
+    std::cout<<std::endl;
+    std::cout<<"Edges weight:"<<std::endl;
+    
+    //??
+    boost::property_map<weighted_graph, boost::edge_weight_t>::type EdgeWeightMap = get(boost::edge_weight_t(), weightedG);
+     for(boost::tie(w_edge, w_edgeEnd)=boost::edges(weightedG); w_edge!=w_edgeEnd; ++w_edge)
+         std::cout<<EdgeWeightMap[*w_edge]<<" ";
     
     
     
@@ -142,3 +177,6 @@ int main()
 }
 
 
+
+//TODO: Studiare qualche funzione interessante
+//TODO: Utilizzare struct o class personalizzate come nodi del grafo
