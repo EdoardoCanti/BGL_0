@@ -7,13 +7,13 @@
    - Insert a new vertex, and eventually edges, on a built graph.
 
 2. Understanding **directional graph**.
-  - Understanding **in-edges** and **out-edges iterators**.
-  - Solved issue using in-edges on a directional graph.
-  - Implementation of a **bidirectional graph**.
+   - Understanding **in-edges** and **out-edges iterators**.
+   - Solved issue using in-edges on a directional graph.
+   - Implementation of a **bidirectional graph**.
 
 3. Learn **property-maps**.
-  - Implementation of **weighted graph**.
-  - Printing out weights for each edge.
+   - Implementation of **weighted graph**.
+   - Printing out weights for each edge.
 
 4. **Classes instances used as graph vertices**.
-  - Printing their own values with *graph_name[pointer_vertex_iterator]*.
+   - Printing their own values with *graph_name[pointer_vertex_iterator]*.
