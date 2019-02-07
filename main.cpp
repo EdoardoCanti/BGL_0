@@ -150,8 +150,8 @@ int main()
     weighted_graph::out_edge_iterator w_outEdge, w_outEdgeEnd;
     weighted_graph::edge_iterator w_edge, w_edgeEnd;
     
-    boost::add_edge(w1, w2, 3, weightedG);
-    boost::add_edge(w2, w1, 1, weightedG);
+    boost::add_edge(w1, w2, -3, weightedG);
+    boost::add_edge(w2, w1, 14, weightedG);
     boost::add_edge(w1, w3, 4, weightedG);
     
     std::cout<<"Vertices of weighted graph: ";
@@ -166,17 +166,40 @@ int main()
     std::cout<<std::endl;
     std::cout<<"Edges weight:"<<std::endl;
     
-    //??
+    /*
+     Creo una property_map<tipo di grafo, tipo da salvare>::type NOME_MAPPA = ottieni (funzione_peso_arco, MIO_GRAFO)
+     itero sugli archi stampando il valore della mappa per ogni arco. RETURN: peso degli archi
+     */
     boost::property_map<weighted_graph, boost::edge_weight_t>::type EdgeWeightMap = get(boost::edge_weight_t(), weightedG);
      for(boost::tie(w_edge, w_edgeEnd)=boost::edges(weightedG); w_edge!=w_edgeEnd; ++w_edge)
-         std::cout<<EdgeWeightMap[*w_edge]<<" ";
+         std::cout<<*w_edge<<" weight: "<<EdgeWeightMap[*w_edge]<<std::endl;
     
+    std::cout<<std::endl<<std::endl;
+    std::cout<<"[OBJECT AS VERTICES]"<<std::endl;
     
+    //Grafo di puntatori ad oggetti definiti (Node*)
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::bidirectionalS, Node*> type_graph;
+    type_graph userGraph;
+    type_graph::vertex_iterator type_Vertex, type_VertexEnd;
+    type_graph::edge_iterator type_Edge, type_EdgeEnd;
+    type_graph::in_edge_iterator type_inEdge, type_inEdgeEnd;
+    type_graph::out_edge_iterator type_outEdge, type_outEdgeEnd;
     
+    Node* userNode1 = new Node(100, "One-Hundred");
+    Node* userNode2 = new Node(200, "Two-Hundred");
+    
+    //FIXED: Stampare attributi di un oggetto definito
+    type_graph::vertex_descriptor node1 = boost::add_vertex(userNode1, userGraph);
+    type_graph::vertex_descriptor node2 = boost::add_vertex(userNode2, userGraph);
+    
+    std::cout<<"Printing Object Vertices value in order [Name, Id]: "<<std::endl;
+    boost::tie(type_Vertex, type_VertexEnd) = boost::vertices(userGraph);
+    for(; type_Vertex!=type_VertexEnd; type_Vertex++)
+        std::cout<<"  • Vertex("<<*type_Vertex<<"): ["<<userGraph[*type_Vertex]->getName()<<" , "<<userGraph[*type_Vertex]->getIdentifier()<<"]"<<std::endl;
+    
+    std::cout<<std::endl;
     
 }
+//TODO: graphviz()
 
 
-
-//TODO: Studiare qualche funzione interessante
-//TODO: Utilizzare struct o class personalizzate come nodi del grafo
