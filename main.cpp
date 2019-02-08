@@ -178,8 +178,10 @@ int main()
     std::cout<<"[OBJECT AS VERTICES]"<<std::endl;
     
     //Grafo di puntatori ad oggetti definiti (Node*)
-    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::bidirectionalS, Node*> type_graph;
-    type_graph userGraph;
+    typedef boost::property<boost::edge_weight_t, int> TYPE_EDGEWEIGHT; //DEFINISCO LA PROPRIETA' PESO
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::bidirectionalS, Node*, TYPE_EDGEWEIGHT> type_graph; //TIPO DI GRAFO
+    type_graph userGraph; //GRAFO
+    boost::property_map<type_graph, boost::edge_weight_t>::type TYPE_EDGE_WEIGHT = get(boost::edge_weight_t(), userGraph); //MAPPA
     type_graph::vertex_iterator type_Vertex, type_VertexEnd;
     type_graph::edge_iterator type_Edge, type_EdgeEnd;
     type_graph::in_edge_iterator type_inEdge, type_inEdgeEnd;
@@ -187,6 +189,7 @@ int main()
     
     Node* userNode1 = new Node(100, "One-Hundred");
     Node* userNode2 = new Node(200, "Two-Hundred");
+    
     
     //FIXED: Stampare attributi di un oggetto definito
     type_graph::vertex_descriptor node1 = boost::add_vertex(userNode1, userGraph);
@@ -200,11 +203,18 @@ int main()
         userGraph[*type_Vertex]->toString();
     }
     
-    boost::add_edge(node1, node2, userGraph);
-    boost::add_edge(node2, node1, userGraph);
-    for(boost::tie(type_Edge, type_EdgeEnd)=boost::edges(userGraph); type_Edge!=type_EdgeEnd; ++type_Edge)
-        std::cout<<*type_Edge;
+    /*
+        Make weighted edges in this way:
+        i : Node
+        j : Node
+        LET E=(i,j) an edge.
+        weight E = i->id - j->id.
+     */
     
+    boost::add_edge(node1, node2, userNode1->getIdentifier()-userNode2->getIdentifier() ,userGraph);
+    boost::add_edge(node2, node1, userNode2->getIdentifier()-userNode1->getIdentifier() ,userGraph);
+    for(boost::tie(type_Edge, type_EdgeEnd)=boost::edges(userGraph); type_Edge!=type_EdgeEnd; ++type_Edge)
+        std::cout<<*type_Edge<<" weight: "<<TYPE_EDGE_WEIGHT[*type_Edge]<<std::endl;
     
     std::cout<<std::endl;
     

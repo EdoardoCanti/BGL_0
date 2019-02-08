@@ -17,3 +17,7 @@
 
 4. **Classes instances used as graph vertices**.
    - Printing their own values with *graph_name[pointer_vertex_iterator]*.
+   - Created new **property** for weighted edges on Object-Graph.
+   - Created new **property map** for those weight.
+   - Weight are defined as difference between nodes id.
+   - Print those weight.
