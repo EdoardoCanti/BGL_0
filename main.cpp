@@ -192,10 +192,19 @@ int main()
     type_graph::vertex_descriptor node1 = boost::add_vertex(userNode1, userGraph);
     type_graph::vertex_descriptor node2 = boost::add_vertex(userNode2, userGraph);
     
-    std::cout<<"Printing Object Vertices value in order [Name, Id]: "<<std::endl;
+    std::cout<<"Printing Object Vertices: "<<std::endl;
     boost::tie(type_Vertex, type_VertexEnd) = boost::vertices(userGraph);
     for(; type_Vertex!=type_VertexEnd; type_Vertex++)
-        std::cout<<"  • Vertex("<<*type_Vertex<<"): ["<<userGraph[*type_Vertex]->getName()<<" , "<<userGraph[*type_Vertex]->getIdentifier()<<"]"<<std::endl;
+    {
+        //Itero sui vertici (Node Object) del grafo userGraph e per ognuno eseguo il metodo toString() della classe Node
+        userGraph[*type_Vertex]->toString();
+    }
+    
+    boost::add_edge(node1, node2, userGraph);
+    boost::add_edge(node2, node1, userGraph);
+    for(boost::tie(type_Edge, type_EdgeEnd)=boost::edges(userGraph); type_Edge!=type_EdgeEnd; ++type_Edge)
+        std::cout<<*type_Edge;
+    
     
     std::cout<<std::endl;
     
