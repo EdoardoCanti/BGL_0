@@ -9,6 +9,7 @@
 #include <iostream>
 #include <boost/graph/adjacency_list.hpp>
 #include "Node.h"
+#include <boost/graph/graphviz.hpp>
 
 int main()
 {
@@ -218,6 +219,19 @@ int main()
     
     std::cout<<std::endl;
     
+    //Printing graph
+    std::ofstream file;
+    file.open("userGraph.dot");
+    //boost::write_graphviz(dmp,graph);
+    //boost::write_graphviz(dmp, directG);
+    //boost::write_graphviz(dmp, weightedG);
+    boost::write_graphviz(file, userGraph);
+    //TERMINAL : dot -Tpng userGraph.dot -o userG_dot.png
+
+    
+    
+    
+   
 }
 //TODO: graphviz()
 
