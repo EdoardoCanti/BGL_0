@@ -29,4 +29,4 @@
    - **What to do next:**
      - Use *boost::make_label_writer()*.
    	 - Print weight.
-   	 - To view graph: >>Terminal: dot -Tpng <graph_file_name>.dot -o <graph_view_name>.png
+   	 - To view graph: >>Terminal: *dot -Tpng <graph_file_name>.dot -o <graph_view_name>.png*
