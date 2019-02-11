@@ -27,5 +27,6 @@
    - Using an **std::ofstream** file to encode the graph.
    - *boost::write_graphviz(<std::ofstream_name>, <graph_name>);*
    - **What to do next:**
-   	- Use *boost::make_label_writer()*.
-   	- Print weight.
+     - Use *boost::make_label_writer()*.
+   	 - Print weight.
+   	 - To view graph: >>Terminal: dot -Tpng <graph_file_name>.dot -o <graph_view_name>.png
