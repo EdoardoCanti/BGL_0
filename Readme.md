@@ -1,4 +1,4 @@
-**Fundamentals of Boost Graph Library** :octocat:
+# Fundamentals of Boost Graph Library :octocat:
 
 1. Definition of **undirected graph** using **adjacency list**.
    - Definition of vertices and edges.
